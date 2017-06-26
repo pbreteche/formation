@@ -9,6 +9,7 @@ import {Vineyard} from '../models/vineyard';
 export class AppComponent {
   currentVineyard: Vineyard;
   vineyardList: Array<Vineyard>;
+  isEditing = false;
 
   constructor() {
     this.vineyardList = [
@@ -39,5 +40,9 @@ export class AppComponent {
 
   setCurrentVineyard(vineyard: Vineyard) {
     this.currentVineyard = vineyard;
+  }
+
+  setEditing() {
+    this.isEditing = true;
   }
 }

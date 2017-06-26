@@ -3,6 +3,8 @@
     {{ currentVineyard.name }}
   </h1>
 </div>
-
-<app-menu (vineyardSelection)="setCurrentVineyard($event)"  [vineyards]="vineyardList"></app-menu>
-<app-detail [vineyard]="currentVineyard"></app-detail>
+<div class="main">
+  <app-menu (vineyardSelection)="setCurrentVineyard($event)"  [vineyards]="vineyardList"></app-menu>
+  <app-detail [vineyard]="currentVineyard" *ngIf="!isEditing" (edition)="setEditing()"></app-detail>
+  <app-edit [vineyard]="currentVineyard" *ngIf="isEditing"></app-edit>
+</div>

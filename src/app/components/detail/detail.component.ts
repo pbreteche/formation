@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import {Vineyard} from 'models/vineyard';
 
 @Component({
@@ -11,9 +11,15 @@ export class DetailComponent implements OnInit {
   @Input()
   vineyard: Vineyard;
 
+  @Output()
+  edition = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  edit() {
+    this.edition.emit()
+  }
 }

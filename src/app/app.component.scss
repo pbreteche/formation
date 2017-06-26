@@ -3,3 +3,15 @@ $titleColor : red;
 h1 {
   color: $titleColor;
 }
+
+.main {
+  display: flex;
+}
+
+app-menu {
+  flex: 0 1 20%;
+}
+
+app-detail {
+  flex: 0 1 80%;
+}
