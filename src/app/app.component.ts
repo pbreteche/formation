@@ -35,6 +35,9 @@ export class AppComponent {
 
     ];
     this.currentVineyard = this.vineyardList[0];
+  }
 
+  setCurrentVineyard(vineyard: Vineyard) {
+    this.currentVineyard = vineyard;
   }
 }

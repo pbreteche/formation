@@ -1,5 +1,5 @@
 <ul>
-  <li *ngFor="let vineyard of vineyards">
+  <li *ngFor="let vineyard of vineyards"  (click)="selectVineyard(vineyard)">
     {{ vineyard.name }}
   </li>
 </ul>

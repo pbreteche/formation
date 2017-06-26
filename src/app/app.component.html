@@ -4,5 +4,5 @@
   </h1>
 </div>
 
-<app-menu   [vineyards]="vineyardList"></app-menu>
+<app-menu (vineyardSelection)="setCurrentVineyard($event)"  [vineyards]="vineyardList"></app-menu>
 <app-detail [vineyard]="currentVineyard"></app-detail>
