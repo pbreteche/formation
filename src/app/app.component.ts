@@ -7,10 +7,10 @@ import {Vineyard} from '../models/vineyard';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  vineyard: Vineyard;
+  currentVineyard: Vineyard;
 
   constructor() {
-    this.vineyard = new Vineyard(
+    this.currentVineyard = new Vineyard(
       'Domaine de Pierre',
       '3 chemin des pins',
       42

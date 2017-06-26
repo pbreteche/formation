@@ -1,7 +1,8 @@
 <div>
   <h1>
-    {{ vineyard.name }}
+    {{ currentVineyard.name }}
   </h1>
-  <p>Retrouvez-nous au {{ vineyard.address }}, et profitez d'une visite d'un domaine de {{ vineyard.area }}.</p>
 </div>
 
+<app-menu></app-menu>
+<app-detail [vineyard]="currentVineyard"></app-detail>
