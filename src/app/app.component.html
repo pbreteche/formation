@@ -5,6 +5,6 @@
 </div>
 <div class="main">
   <app-menu (vineyardSelection)="setCurrentVineyard($event)"  [vineyards]="vineyardList"></app-menu>
-  <app-detail [vineyard]="currentVineyard" *ngIf="!isEditing" (edition)="setEditing()"></app-detail>
-  <app-edit [vineyard]="currentVineyard" *ngIf="isEditing"></app-edit>
+  <app-detail [vineyard]="currentVineyard" *ngIf="!isEditing" (edition)="setEditing(true)"></app-detail>
+  <app-edit [vineyard]="currentVineyard" *ngIf="isEditing"  (edition)="setEditing(false)"></app-edit>
 </div>

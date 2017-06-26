@@ -1,3 +1,24 @@
-<p>
-  edit works!
-</p>
+<form>
+  <div>
+    <label for="vineyard[name]">Nom</label>
+    <input
+      type="text" id="vineyard[name]" name="vineyard[name]"
+      [(ngModel)]="vineyard.name"
+    />
+  </div>
+  <div>
+    <label for="vineyard[address]">Adresse</label>
+    <input
+      type="text" id="vineyard[address]" name="vineyard[address]"
+      [(ngModel)]="vineyard.address"
+    />
+  </div>
+  <div>
+    <label for="vineyard[area]">Surface</label>
+    <input
+      type="number" id="vineyard[area]" name="vineyard[area]"
+      [(ngModel)]="vineyard.area"
+    />
+  </div>
+  <button (click)="stopEditing()">Mettre à jour</button>
+</form>

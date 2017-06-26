@@ -42,7 +42,7 @@ export class AppComponent {
     this.currentVineyard = vineyard;
   }
 
-  setEditing() {
-    this.isEditing = true;
+  setEditing(isEditing: boolean) {
+    this.isEditing = isEditing;
   }
 }
