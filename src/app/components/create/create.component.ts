@@ -1,5 +1,6 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Vineyard} from 'models/vineyard';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-create',
@@ -18,9 +19,9 @@ export class CreateComponent implements OnInit {
   ngOnInit() {
   }
 
-  create() {
+  create(form: FormGroup) {
     this.creation.emit(this.newVineyard);
     this.newVineyard = new Vineyard();
+    form.reset()
   }
-
 }

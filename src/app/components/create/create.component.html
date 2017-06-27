@@ -1,16 +1,18 @@
-<form>
+<form #vForm="ngForm">
   <div>
+    <p [hidden]="vName.valid || vName.untouched">Vous devez donner un nom à votre vignoble</p>
     <label for="vineyard[name]">Nom</label>
     <input
       type="text" id="vineyard[name]" name="vineyard[name]"
-      [(ngModel)]="newVineyard.name"
+      [(ngModel)]="newVineyard.name" required
+      #vName="ngModel"
     />
   </div>
   <div>
     <label for="vineyard[address]">Adresse</label>
     <input
       type="text" id="vineyard[address]" name="vineyard[address]"
-      [(ngModel)]="newVineyard.address"
+      [(ngModel)]="newVineyard.address" pattern=".{5,}" required
     />
   </div>
   <div>
@@ -20,5 +22,5 @@
       [(ngModel)]="newVineyard.area"
     />
   </div>
-  <button (click)="create()">Créer</button>
+  <button [disabled]="vForm.invalid" (click)="create(vForm)">Créer</button>
 </form>
