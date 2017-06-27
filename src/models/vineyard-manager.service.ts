@@ -39,6 +39,16 @@ export class VineyardManagerService  {
   }
 
   add(newVineyard: Vineyard) {
-    this.vineyardList.push(newVineyard);
+    this.client.post('fausse-url', newVineyard).subscribe(
+      response => this.vineyardList.push(newVineyard)
+    );
+  }
+
+  remove(vineyard: Vineyard) {
+    if (this.vineyardList.length < 1) {
+      throw 'trop peu de vignobles pour en supprimer d\'avantage';
+    }
+    this.vineyardList.splice(this.vineyardList.indexOf(vineyard), 1);
+    this._current.next(this.vineyardList[0]);
   }
 }

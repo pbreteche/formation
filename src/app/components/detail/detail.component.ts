@@ -14,7 +14,7 @@ export class DetailComponent implements OnInit {
   @Output()
   edition = new EventEmitter();
 
-  constructor(vineyardManager: VineyardManagerService) {
+  constructor(private vineyardManager: VineyardManagerService) {
     this.vineyard = new Vineyard('En cours de chargement');
     vineyardManager.current.subscribe(
       vineyard => this.vineyard = vineyard
@@ -26,5 +26,9 @@ export class DetailComponent implements OnInit {
 
   edit() {
     this.edition.emit()
+  }
+
+  remove() {
+    this.vineyardManager.remove(this.vineyard);
   }
 }
