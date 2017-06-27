@@ -12,7 +12,7 @@ export class MenuComponent implements OnInit {
   vineyards: Vineyard[];
 
   constructor(private vineyardManager: VineyardManagerService) {
-     vineyardManager.vineyardPromise.then(
+     vineyardManager.vineyardObservable.subscribe(
       vineyards => { this.vineyards = vineyards }
     );
   }
@@ -21,7 +21,7 @@ export class MenuComponent implements OnInit {
   }
 
   selectVineyard(vineyard: Vineyard) {
-    this.vineyardManager.current = vineyard;
+    this.vineyardManager.setCurrent(vineyard);
   }
 
 }

@@ -1,30 +1,41 @@
 import {Injectable} from '@angular/core';
 import {Vineyard} from './vineyard';
 import {Http} from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import {Observable, Subject} from 'rxjs';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class VineyardManagerService  {
-  current: Vineyard;
-  vineyardPromise: Promise<Vineyard[]>;
+  _current = new Subject<Vineyard>();
+  vineyardObservable: Observable<Vineyard[]>;
   vineyardList: Vineyard[];
 
   constructor( private client: Http) {
-    this.current = new Vineyard('Chargement en cours', 'Patientez');
     this.vineyardList = [];
     this.callAPI();
   }
 
   callAPI() {
 
-    this.vineyardPromise = this.client.get('assets/list.json')
-      .toPromise()
-      .then((response) =>
-        this.vineyardList = response.json().payload.map(
-          vineyardData => Object.assign(new Vineyard(), vineyardData)
-        ) as Vineyard[]
-      )
-      .catch( error => { console.log(error) });
+    this.vineyardObservable = this.client.get('assets/list.json')
+      .map((response) => {
+          this.vineyardList = response.json().payload.map(
+            vineyardData => Object.assign(new Vineyard(), vineyardData)
+          ) as Vineyard[];
+
+          this._current.next(this.vineyardList[0]);
+
+          return this.vineyardList;
+        }
+      );
+  }
+
+  get current (): Observable<Vineyard> {
+    return Observable.from(this._current);
+  }
+
+  setCurrent (vineyard: Vineyard) {
+    this._current.next(vineyard);
   }
 
   add(newVineyard: Vineyard) {

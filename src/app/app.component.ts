@@ -12,7 +12,10 @@ export class AppComponent {
   isEditing = false;
 
   constructor(vineyardManager: VineyardManagerService) {
-    this.currentVineyard = vineyardManager.current;
+    this.currentVineyard = new Vineyard('En cours de chargement');
+    vineyardManager.current.subscribe(
+      vineyard => this.currentVineyard = vineyard
+    );
   }
 
   setEditing(isEditing: boolean) {

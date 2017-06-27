@@ -15,7 +15,10 @@ export class DetailComponent implements OnInit {
   edition = new EventEmitter();
 
   constructor(vineyardManager: VineyardManagerService) {
-    this.vineyard = vineyardManager.current;
+    this.vineyard = new Vineyard('En cours de chargement');
+    vineyardManager.current.subscribe(
+      vineyard => this.vineyard = vineyard
+    );
   }
 
   ngOnInit() {

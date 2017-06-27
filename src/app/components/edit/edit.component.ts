@@ -15,7 +15,10 @@ export class EditComponent implements OnInit {
   edition = new EventEmitter();
 
   constructor(vineyardManager: VineyardManagerService) {
-    this.vineyard = vineyardManager.current;
+    this.vineyard = new Vineyard();
+    vineyardManager.current.subscribe(
+      vineyard => this.vineyard = vineyard
+    );
   }
 
   ngOnInit() {

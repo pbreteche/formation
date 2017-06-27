@@ -20,6 +20,6 @@ export class CreateComponent implements OnInit {
   create(form: FormGroup) {
     this.vineyardManager.add(this.newVineyard);
     this.newVineyard = new Vineyard();
-    form.reset()
+    form.reset();
   }
 }

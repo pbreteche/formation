@@ -6,6 +6,6 @@
 <app-create></app-create>
 <div class="main">
   <app-menu></app-menu>
-  <app-detail *ngIf="!isEditing" (edition)="setEditing(true)"></app-detail>
-  <app-edit *ngIf="isEditing"  (edition)="setEditing(false)"></app-edit>
+  <app-detail [hidden]="isEditing" (edition)="setEditing(true)"></app-detail>
+  <app-edit [hidden]="!isEditing"  (edition)="setEditing(false)"></app-edit>
 </div>
