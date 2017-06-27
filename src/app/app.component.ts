@@ -45,4 +45,8 @@ export class AppComponent {
   setEditing(isEditing: boolean) {
     this.isEditing = isEditing;
   }
+
+  add(vineyard: Vineyard) {
+    this.vineyardList.push(vineyard);
+  }
 }
