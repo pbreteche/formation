@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import {Vineyard} from 'models/vineyard';
+import {VineyardManagerService} from '../../../models/vineyard-manager.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,19 +9,17 @@ import {Vineyard} from 'models/vineyard';
 })
 export class MenuComponent implements OnInit {
 
-  @Input()
   vineyards: Vineyard[];
 
-  @Output()
-  vineyardSelection = new EventEmitter<Vineyard>();
-
-  constructor() { }
+  constructor(private vineyardManager: VineyardManagerService) {
+    this.vineyards = vineyardManager.getList();
+  }
 
   ngOnInit() {
   }
 
   selectVineyard(vineyard: Vineyard) {
-    this.vineyardSelection.emit(vineyard);
+    this.vineyardManager.setCurrent(vineyard);
   }
 
 }

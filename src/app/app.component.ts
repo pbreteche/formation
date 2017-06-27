@@ -17,15 +17,7 @@ export class AppComponent {
     this.currentVineyard = this.vineyardList[0];
   }
 
-  setCurrentVineyard(vineyard: Vineyard) {
-    this.currentVineyard = vineyard;
-  }
-
   setEditing(isEditing: boolean) {
     this.isEditing = isEditing;
-  }
-
-  add(vineyard: Vineyard) {
-    this.vineyardList.push(vineyard);
   }
 }

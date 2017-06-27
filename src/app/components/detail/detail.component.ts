@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import {Vineyard} from 'models/vineyard';
+import {VineyardManagerService} from '../../../models/vineyard-manager.service';
 
 @Component({
   selector: 'app-detail',
@@ -8,13 +9,14 @@ import {Vineyard} from 'models/vineyard';
 })
 export class DetailComponent implements OnInit {
 
-  @Input()
   vineyard: Vineyard;
 
   @Output()
   edition = new EventEmitter();
 
-  constructor() { }
+  constructor(vineyardManager: VineyardManagerService) {
+    this.vineyard = vineyardManager.current;
+  }
 
   ngOnInit() {
   }

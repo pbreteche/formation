@@ -1,6 +1,7 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Vineyard} from 'models/vineyard';
 import {FormGroup} from '@angular/forms';
+import {VineyardManagerService} from '../../../models/vineyard-manager.service';
 
 @Component({
   selector: 'app-create',
@@ -11,16 +12,13 @@ export class CreateComponent implements OnInit {
 
   newVineyard = new Vineyard();
 
-  @Output()
-  creation = new EventEmitter<Vineyard>();
-
-  constructor() { }
+  constructor(private vineyardManager: VineyardManagerService) { }
 
   ngOnInit() {
   }
 
   create(form: FormGroup) {
-    this.creation.emit(this.newVineyard);
+    this.vineyardManager.add(this.newVineyard);
     this.newVineyard = new Vineyard();
     form.reset()
   }
