@@ -12,14 +12,16 @@ export class MenuComponent implements OnInit {
   vineyards: Vineyard[];
 
   constructor(private vineyardManager: VineyardManagerService) {
-    this.vineyards = vineyardManager.getList();
+     vineyardManager.vineyardPromise.then(
+      vineyards => { this.vineyards = vineyards }
+    );
   }
 
   ngOnInit() {
   }
 
   selectVineyard(vineyard: Vineyard) {
-    this.vineyardManager.setCurrent(vineyard);
+    this.vineyardManager.current = vineyard;
   }
 
 }

@@ -9,12 +9,10 @@ import {VineyardManagerService} from '../models/vineyard-manager.service';
 })
 export class AppComponent {
   currentVineyard: Vineyard;
-  vineyardList: Array<Vineyard>;
   isEditing = false;
 
   constructor(vineyardManager: VineyardManagerService) {
-    this.vineyardList = vineyardManager.getList();
-    this.currentVineyard = this.vineyardList[0];
+    this.currentVineyard = vineyardManager.current;
   }
 
   setEditing(isEditing: boolean) {

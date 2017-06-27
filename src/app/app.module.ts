@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -9,8 +10,6 @@ import { EditComponent } from './components/edit/edit.component';
 import { CreateComponent } from './components/create/create.component';
 import {VineyardManagerService} from '../models/vineyard-manager.service';
 import {VINEYARD_LIST, VINEYARD_LIST_TOKEN} from '../config/vineyard-list';
-
-let vineyardFactory = (count: number) => new VineyardManagerService(VINEYARD_LIST);
 
 @NgModule({
   declarations: [
@@ -22,7 +21,8 @@ let vineyardFactory = (count: number) => new VineyardManagerService(VINEYARD_LIS
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   providers: [
     //VineyardManagerService => identique à la ligne suivante

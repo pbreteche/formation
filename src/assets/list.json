@@ -1,0 +1,25 @@
+{
+  "status": "success",
+  "payload": [
+    {
+      "name": "Domaine de Pierre",
+      "address": "3 chemin des pins",
+      "area": 42
+    },
+    {
+      "name": "Château Bertrand",
+      "address": "3 route de la plage",
+      "area": 51
+    },
+    {
+      "name": "Saint Maxime",
+      "address": "3 allée de la soleil",
+      "area": 39
+    },
+    {
+      "name": "Mont Julien",
+      "address": "3 boulevard des dunes",
+      "area": 45
+    }
+  ]
+}
