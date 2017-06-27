@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Vineyard} from '../models/vineyard';
+import {VineyardManagerService} from '../models/vineyard-manager.service';
 
 @Component({
   selector: 'app-root',
@@ -11,30 +12,8 @@ export class AppComponent {
   vineyardList: Array<Vineyard>;
   isEditing = false;
 
-  constructor() {
-    this.vineyardList = [
-      new Vineyard(
-        'Domaine de Pierre',
-        '3 chemin des pins',
-        42
-      ),
-      new Vineyard(
-        'Château Bertrand',
-        '3 route de la plage',
-        51
-      ),
-      new Vineyard(
-        'Saint Maxime',
-        '3 allée de la soleil',
-        39
-      ),
-      new Vineyard(
-        'Mont Julien',
-        '3 boulevard des dunes',
-        45
-      ),
-
-    ];
+  constructor(vineyardManager: VineyardManagerService) {
+    this.vineyardList = vineyardManager.getList();
     this.currentVineyard = this.vineyardList[0];
   }
 

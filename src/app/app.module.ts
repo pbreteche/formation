@@ -7,6 +7,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
 import { CreateComponent } from './components/create/create.component';
+import {VineyardManagerService} from '../models/vineyard-manager.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { CreateComponent } from './components/create/create.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    VineyardManagerService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
