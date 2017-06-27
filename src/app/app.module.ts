@@ -8,6 +8,9 @@ import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
 import { CreateComponent } from './components/create/create.component';
 import {VineyardManagerService} from '../models/vineyard-manager.service';
+import {VINEYARD_LIST, VINEYARD_LIST_TOKEN} from '../config/vineyard-list';
+
+let vineyardFactory = (count: number) => new VineyardManagerService(VINEYARD_LIST);
 
 @NgModule({
   declarations: [
@@ -22,7 +25,12 @@ import {VineyardManagerService} from '../models/vineyard-manager.service';
     FormsModule
   ],
   providers: [
-    VineyardManagerService
+    //VineyardManagerService => identique à la ligne suivante
+    { provide: VineyardManagerService, useClass: VineyardManagerService },
+    { provide: VINEYARD_LIST_TOKEN, useValue: VINEYARD_LIST },
+    // autres exemples de déclaration de services
+    // { provide: VINEYARD_LIST_TOKEN, useFactory: vineyardFactory, deps: [42] },
+    // { provide: VINEYARD_LIST_TOKEN, useExisting: VineyardManagerService }
   ],
   bootstrap: [AppComponent]
 })
