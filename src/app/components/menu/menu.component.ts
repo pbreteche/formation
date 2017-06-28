@@ -12,12 +12,13 @@ export class MenuComponent implements OnInit {
   vineyards: Vineyard[];
 
   constructor(private vineyardManager: VineyardManagerService) {
-     vineyardManager.vineyardObservable.subscribe(
-      vineyards => { this.vineyards = vineyards }
-    );
+    this.vineyards = this.vineyardManager.vineyardList;
   }
 
   ngOnInit() {
+    this.vineyardManager.list.subscribe(
+      vineyards => { this.vineyards = vineyards }
+    );
   }
 
   selectVineyard(vineyard: Vineyard) {

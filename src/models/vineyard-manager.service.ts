@@ -3,11 +3,12 @@ import {Vineyard} from './vineyard';
 import {Http} from '@angular/http';
 import {Observable, Subject} from 'rxjs';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class VineyardManagerService  {
   _current = new Subject<Vineyard>();
-  vineyardObservable: Observable<Vineyard[]>;
+  vineyardSubject: Subject<Vineyard[]>;
   vineyardList: Vineyard[];
 
   constructor( private client: Http) {
@@ -17,21 +18,25 @@ export class VineyardManagerService  {
 
   callAPI() {
 
-    this.vineyardObservable = this.client.get('assets/list.json')
-      .map((response) => {
+    this.vineyardSubject = new Subject<Vineyard[]>();
+    this.client.get('assets/list.json')
+      .subscribe((response) => {
           this.vineyardList = response.json().payload.map(
             vineyardData => Object.assign(new Vineyard(), vineyardData)
           ) as Vineyard[];
 
           this._current.next(this.vineyardList[0]);
-
-          return this.vineyardList;
+          this.vineyardSubject.next(this.vineyardList);
         }
       );
   }
 
   get current (): Observable<Vineyard> {
     return Observable.from(this._current);
+  }
+
+  get list (): Observable<Vineyard[]> {
+    return Observable.from(this.vineyardSubject);
   }
 
   setCurrent (vineyard: Vineyard) {
@@ -48,7 +53,20 @@ export class VineyardManagerService  {
     if (this.vineyardList.length < 1) {
       throw 'trop peu de vignobles pour en supprimer d\'avantage';
     }
+    // TODO: récupérer le bon élément à supprimer en passant par l'ID
     this.vineyardList.splice(this.vineyardList.indexOf(vineyard), 1);
     this._current.next(this.vineyardList[0]);
+  }
+
+  get(id: number): Promise<Vineyard> {
+    return this.client.get('assets/list.json')
+      .toPromise()
+      .then(
+        (response) =>
+          response.json().payload
+            .filter(vineyardData => vineyardData.id == id)
+            .map(vineyardData => Object.assign(new Vineyard(), vineyardData))
+            [0] as Vineyard
+      );
   }
 }

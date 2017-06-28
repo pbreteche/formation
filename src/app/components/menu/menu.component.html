@@ -1,5 +1,5 @@
 <ul>
-  <li *ngFor="let vineyard of vineyards"  (click)="selectVineyard(vineyard)">
-    {{ vineyard.name }}
+  <li *ngFor="let vineyard of vineyards">
+    <a [routerLink]="vineyard.id">{{ vineyard.name }}</a> <a [routerLink]="[vineyard.id, 'edit']">Éditer</a>
   </li>
 </ul>

@@ -10,6 +10,7 @@ import { EditComponent } from './components/edit/edit.component';
 import { CreateComponent } from './components/create/create.component';
 import {VineyardManagerService} from '../models/vineyard-manager.service';
 import {VINEYARD_LIST, VINEYARD_LIST_TOKEN} from '../config/vineyard-list';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,12 @@ import {VINEYARD_LIST, VINEYARD_LIST_TOKEN} from '../config/vineyard-list';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot([
+      { path: '', component: MenuComponent},
+      { path: ':id', component: DetailComponent},
+      { path: ':id/edit', component: EditComponent}
+    ])
   ],
   providers: [
     //VineyardManagerService => identique à la ligne suivante
