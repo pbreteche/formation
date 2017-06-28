@@ -44,9 +44,11 @@ export class VineyardManagerService  {
   }
 
   add(newVineyard: Vineyard) {
-    this.client.post('fausse-url', newVineyard).subscribe(
-      response => this.vineyardList.push(newVineyard)
-    );
+    // this.client.post('fausse-url', newVineyard).subscribe(
+    //   response => this.vineyardList.push(newVineyard)
+    // );
+    newVineyard.id = this.vineyardList.length + 1;
+    this.vineyardList.push(newVineyard);
   }
 
   remove(vineyard: Vineyard) {

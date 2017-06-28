@@ -1,4 +1,4 @@
-<form #vForm="ngForm">
+<form #vForm="ngForm" (submit)="create(vForm)">
   <div>
     <p [hidden]="vName.valid || vName.untouched">Vous devez donner un nom à votre vignoble</p>
     <label for="vineyard[name]">Nom</label>
@@ -22,5 +22,21 @@
       [(ngModel)]="newVineyard.area"
     />
   </div>
-  <button [disabled]="vForm.invalid" (click)="create(vForm)">Créer</button>
+  <div *ngFor="let variety of newVineyard.grapeVarieties; let i = index; trackBy: trackVariety ">
+    <label [for]="'vineyard[grapeVarieties][' + i + ']'">Cépage + {{ i }}</label>
+    <input
+      type="text" [id]="'vineyard[grapeVarieties][' + i + ']'" [name]="'vineyard[grapeVarieties][' + i + ']'"
+      [(ngModel)]="newVineyard.grapeVarieties[i]"
+    />
+  </div>
+  <div>
+    <label for="vineyard[newVariety]">Nouveau cépage</label>
+    <input
+      type="text" id="vineyard[newVariety]" name="vineyard[newVariety]"
+      [(ngModel)]="newVariety" #varietyInput
+    />
+    <button type="button" (click)="add()">+</button>
+  </div>
+
+  <button [disabled]="vForm.invalid">Créer</button>
 </form>

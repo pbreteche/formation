@@ -11,6 +11,7 @@ import {VineyardManagerService} from '../../../models/vineyard-manager.service';
 export class CreateComponent implements OnInit {
 
   newVineyard = new Vineyard();
+  newVariety = '';
 
   constructor(private vineyardManager: VineyardManagerService) { }
 
@@ -21,5 +22,14 @@ export class CreateComponent implements OnInit {
     this.vineyardManager.add(this.newVineyard);
     this.newVineyard = new Vineyard();
     form.reset();
+  }
+
+  add() {
+    this.newVineyard.grapeVarieties.push(this.newVariety);
+    this.newVariety = '';
+  }
+
+  trackVariety(index: number, variety: string) {
+    return index;
   }
 }
