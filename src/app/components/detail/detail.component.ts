@@ -18,13 +18,13 @@ export class DetailComponent implements OnInit {
     private router: Router
   ) {
     this.vineyard = new Vineyard('En cours de chargement');
-    this.activatedRoute.params.subscribe(
-      (params: Params) =>
-        this.vineyardManager.get(+params.id).then((vineyard: Vineyard) => this.vineyard = vineyard )
-    );
   }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe(
+      (params: Params) =>
+        this.vineyardManager.get(params && +params.id).then((vineyard: Vineyard) => this.vineyard = vineyard )
+    );
   }
 
   remove() {

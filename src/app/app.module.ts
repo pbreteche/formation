@@ -9,8 +9,8 @@ import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
 import { CreateComponent } from './components/create/create.component';
 import {VineyardManagerService} from '../models/vineyard-manager.service';
-import {VINEYARD_LIST, VINEYARD_LIST_TOKEN} from '../config/vineyard-list';
 import {RouterModule} from '@angular/router';
+import {AdminGuard} from './admin-guard';
 
 @NgModule({
   declarations: [
@@ -26,14 +26,21 @@ import {RouterModule} from '@angular/router';
     HttpModule,
     RouterModule.forRoot([
       { path: '', component: MenuComponent},
-      { path: ':id', component: DetailComponent},
-      { path: ':id/edit', component: EditComponent}
+      {
+        path: ':id',
+        children: [
+          { path: '', component: DetailComponent },
+          { path: 'edit', component: EditComponent, data: { sideBar: 'admin-bar' }, canActivate: [ AdminGuard ] }
+        ]
+      },
+      { path: 'create', component: CreateComponent, outlet: 'popup'},
+      { path: '**', redirectTo: '', pathMatch: 'full' }
     ])
   ],
   providers: [
     //VineyardManagerService => identique à la ligne suivante
     { provide: VineyardManagerService, useClass: VineyardManagerService },
-    { provide: VINEYARD_LIST_TOKEN, useValue: VINEYARD_LIST },
+    AdminGuard
     // autres exemples de déclaration de services
     // { provide: VINEYARD_LIST_TOKEN, useFactory: vineyardFactory, deps: [42] },
     // { provide: VINEYARD_LIST_TOKEN, useExisting: VineyardManagerService }

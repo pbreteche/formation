@@ -3,3 +3,5 @@
     <a [routerLink]="vineyard.id">{{ vineyard.name }}</a> <a [routerLink]="[vineyard.id, 'edit']">Éditer</a>
   </li>
 </ul>
+
+<a [routerLink]="[{ outlets: { popup: 'create' }} ]">Créer un nouveau</a>

@@ -7,8 +7,9 @@ describe('formation App', () => {
     page = new FormationPage();
   });
 
-  it('should display welcome message', () => {
+  it('should have 4 links', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!!');
+    console.log(page.getLinkList());
+    expect(page.getLinkList().count()).toEqual(4);
   });
 });
